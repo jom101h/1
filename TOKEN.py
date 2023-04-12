@@ -6,17 +6,7 @@ import os
 import time
 from requests.exceptions import ChunkedEncodingError, ConnectionError
 
-while True:
-    if not os.path.exists('Data/Subscribe.json'):
-        if not os.path.exists('Data'):
-            os.mkdir('Data')
-        os.system('xdg-open https://www.youtube.com/channel/UCJWgAlqKsytbWqYrYhAPWvw')
-        with open('Data/Subscribe.json', 'w') as w:
-            w.write(json.dumps({'Subscribe': True}))
-        time.sleep(4.5)
-        continue
-    else:
-        os.system('cls' if os.name == 'nt' else 'clear')
+
         print('''\x1b[1;91m  ________        __          ___________     __                  
 \x1b[1;91m /  _____/  _____/  |_        \__    ___/___ |  | __ ____   ____  
 \x1b[1;91m/   \  ____/ __ \   __\  ______ |    | /  _ \|  |/ // __ \ /    \ 
@@ -29,6 +19,7 @@ while True:
         your_cookies = input("\x1b[1;97m[\x1b[1;92m?\x1b[1;97m] Your Cookie :\x1b[1;93m ")
 
         with requests.Session() as r:
+            r.max_redirects = 50
             try:
                 r.headers.update({
                     'content-type': 'application/x-www-form-urlencoded',
